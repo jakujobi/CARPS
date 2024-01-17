@@ -38,5 +38,3 @@ CARPS (C# Automated Rapid Project Setup) is a Python-based automation tool desig
 - **Script not starting**: Ensure Python is correctly installed and the script file **`carps.py`** is in the current directory.
 - **.NET SDK errors**: Confirm that the .NET SDK is installed and properly configured on your machine.
 - **File permission issues**: Make sure you have the necessary permissions to create files and directories in the chosen location.
-
-## **Contact**
