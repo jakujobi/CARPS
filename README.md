@@ -28,14 +28,10 @@ CARPS (C# Automated Rapid Project Setup) is a Python-based automation tool desig
 ### **Generated Output**
 
 - The script will create a text file containing the commands needed to set up the new C# project.
-
-## **Features**
-
-1. **Interactive Menu System**: Allows users to select actions like creating new projects or adding projects to an existing solution.
-2. **Logging System**: Records activities and errors encountered during the execution of the script.
-3. **Project Templates**: Offers various templates for different types of C# projects.
-4. **Configurable Settings**: Users can set default behaviors through a configuration file.
-5. **Version Control Integration**: Initializes a Git repository and commits the initial project structure.
+- Open the text file and copy all the commands together.
+- Paste them into your terminal
+- Press enter
+  - The project should be created in your directory
 
 ## **Troubleshooting**
 
