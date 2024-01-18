@@ -23,6 +23,7 @@ Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 
 import os
 import platform
+import subprocess
 
 
 def greeting():
@@ -97,6 +98,28 @@ def create_command_text(project_name):
                 f"dotnet sln add {project_name}/{project_name}.csproj"
     return commands
 
+def execute_commands(project_name):
+    commands = [
+        f"mkdir {project_name}",
+        f"cd {project_name}",
+        f"dotnet new sln -n {project_name}",
+        f"dotnet new console -o {project_name}",
+        f"dotnet sln add {project_name}/{project_name}.csproj",
+        f"dotnet build {project_name}/{project_name}.csproj",
+        f"dotnet run --project {project_name}/{project_name}.csproj"
+    ]
+
+    for command in commands:
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = process.communicate()
+
+        if process.returncode != 0:
+            print(f"Failed to execute command: {command}")
+            print(f"Error: {stderr.decode()}")
+        else:
+            print(f"Successfully executed command: {command}")
+            print(f"Output: {stdout.decode()}")
+
 # Create the text file
 def create_text_file(commands, project_name):
     """
@@ -144,10 +167,11 @@ def main():
     Main program that calls the other functions.
     """
     greeting()
-    project_name = get_project_name()  # Use a local variable instead of a global one
-    commands = create_command_text(project_name)
-    create_text_file(commands, project_name)
-    check_text_file(project_name)
+    #project_name = get_project_name()  # Use a local variable instead of a global one
+    execute_commands(get_project_name())
+    #commands = create_command_text(project_name)
+    #create_text_file(commands, project_name)
+    #check_text_file(project_name)
 
 # Call the main function
 main()
