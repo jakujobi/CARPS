@@ -1,5 +1,0 @@
-mkdir Test1 Bas & 
-cd Test1 Bas & 
-dotnet new sln -n Test1 Bas & 
-dotnet new console -o Test1 Bas & 
-dotnet sln add Test1 Bas/Test1 Bas.csproj
