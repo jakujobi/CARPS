@@ -73,7 +73,7 @@ def get_user_environment():
         terminal = "Command Prompt"
     return "Windows", terminal
 
-def GetProjectName():
+def get_project_name():
     """
     Asks the user to enter the name of the project and returns it.
     """
@@ -82,7 +82,7 @@ def GetProjectName():
     print(f"The project name is {ProjectName}.")
     return ProjectName
 
-def CreateCommandText(project_name):
+def create_command_text(project_name):
     """
     Creates a string of commands to create a new project with the given name, and returns it.
     """
@@ -95,44 +95,55 @@ def CreateCommandText(project_name):
     return commands
 
 # Create the text file
-def CreateTextFile(commands, project_name):
+def create_text_file(commands, project_name):
     """
     Creates a text file with the given commands and project name.
     """
-    # Open the text file in write mode
-    # Write the commands to the file
-    # Close the file
-    # Print a message indicating that the file was created successfully.
     try:
         with open(f'{project_name} - Copy into Terminal to create.txt', 'w') as file:
             file.write(commands)
         print("Creating text file...")
+    except PermissionError:
+        print("Failed to create text file: insufficient permissions.")
+    except OSError:
+        print("Failed to create text file: insufficient disk space or other OS error.")
     except Exception as e:
         print(f"Failed to create text file: {e}")
 
 # Check if the text file was created successfully
 # Then print a message indicating that the text file was created successfully.
-def CheckTextFile(project_name):
+def check_text_file(project_name):
     if os.path.exists(f'{project_name} - Copy into Terminal to create.txt'):
-        SuccessfulInstruction()
+        successful_instruction()
     else:
-        FailedInstruction()
+        failed_instruction()
 
-def SuccessfulInstruction():
+def successful_instruction():
+    """
+    A function that prints a success message indicating that a text file has been created successfully.
+    """
     print("Text file created successfully.\n")
 
-def FailedInstruction():
+def failed_instruction():
+    """
+    Prints a failure message indicating that the creation of a text file has failed.
+
+    This function does not take any parameters.
+    This function does not return any values.
+    """
     print("Failed to create text file.")
     print("Please try again.\n")
     print("________________________________________________________________________\n")
 
 # This is the main program that calls the other functions
-def Main():
-    Greeting()
-    project_name = GetProjectName()
-    commands = CreateCommandText(ProjectName)
-    CreateTextFile(commands, ProjectName)
-    CheckTextFile(ProjectName)
+def main():
+    """
+    Main program that calls the other functions.
+    """
+    project_name = get_project_name()  # Use a local variable instead of a global one
+    commands = create_command_text(project_name)
+    create_text_file(commands, project_name)
+    check_text_file(project_name)
 
 # Call the main function
-Main()
+main()
