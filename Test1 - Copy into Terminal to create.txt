@@ -1,0 +1,5 @@
+mkdir Test1 && 
+cd Test1 && 
+dotnet new sln -n Test1 && 
+dotnet new console -o Test1 && 
+dotnet sln add Test1/Test1.csproj

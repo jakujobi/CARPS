@@ -24,16 +24,6 @@ Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 import os
 import platform
 
-def get_os():
-    os = platform.system()
-    if os == "Windows":
-        return "Windows"
-    elif os == "Linux":
-        return "Linux"
-    elif os == "Darwin":
-        return "Mac"
-    else:
-        return "Unknown"
 
 def Greeting():
     print("Welcome to the Project Creator!")
@@ -42,6 +32,41 @@ def Greeting():
     print("_______________________________________________________________________")
     print(" ")
 
+def get_os():
+    operating_system = platform.system()
+    if operating_system == "Windows":
+        operating_system, terminal = get_user_environment()
+        separator = " && " if terminal == "PowerShell" else " & "
+    elif operating_system == "Linux":
+        operating_system, terminal = "Linux", "Bash"
+        separator = " && "
+    elif operating_system == "Darwin":
+        operating_system, terminal = "Mac", "Bash"
+        separator = " && "
+    else:
+        print("Unknown operating system. \nPlease enter the command separator for your platform (e.g., ' & ' for Command Prompt, ' && ' for PowerShell, Linux, Git Bash, Mac): ")
+        separator = input()
+        operating_system, terminal = "Unknown", "Unknown"
+    return operating_system, terminal, separator
+
+def get_user_environment():
+    print("Please select your terminal:")
+    print("1. Command Prompt")
+    print("2. PowerShell")
+    print("3. Other (e.g. Git Bash)")
+    terminal_choice = int(input("Enter the number of your choice: "))
+    if terminal_choice == 1:
+        terminal = "Command Prompt"
+    elif terminal_choice == 2:
+        terminal = "PowerShell"
+    elif terminal_choice == 3:
+        print("Other terminal selected.")
+        terminal = "PowerShell"
+    else:
+        print("Invalid choice. Defaulting to Command Prompt.")
+        terminal = "Command Prompt"
+    return "Windows", terminal
+
 def GetProjectName():
     global ProjectName
     ProjectName = input("Enter the name of the project: ")
@@ -49,15 +74,12 @@ def GetProjectName():
     return ProjectName
 
 def CreateCommandText(project_name):
-    os = get_os()
-    separator = " && " if os == "Windows" else " \\ "
-    commands = f"""
-    mkdir {project_name}{separator}
-    cd {project_name}{separator}
-    dotnet new sln -n {project_name}{separator}
-    dotnet new console -o {project_name}{separator}
-    dotnet sln add {project_name}/{project_name}.csproj
-    """
+    operating_system, terminal, separator = get_os()
+    commands = f"mkdir {project_name}{separator}\n" \
+                f"cd {project_name}{separator}\n" \
+                f"dotnet new sln -n {project_name}{separator}\n" \
+                f"dotnet new console -o {project_name}{separator}\n" \
+                f"dotnet sln add {project_name}/{project_name}.csproj"
     return commands
 
 # Create the text file
