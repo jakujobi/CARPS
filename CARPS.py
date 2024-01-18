@@ -33,6 +33,9 @@ def Greeting():
     print(" ")
 
 def get_os():
+    """
+    Determines the operating system and terminal type, and returns the appropriate command separator.
+    """
     operating_system = platform.system()
     if operating_system == "Windows":
         operating_system, terminal = get_user_environment()
@@ -50,6 +53,9 @@ def get_os():
     return operating_system, terminal, separator
 
 def get_user_environment():
+    """
+    Asks the user to select their terminal type and returns the appropriate command separator.
+    """
     print("Please select your terminal:")
     print("1. Command Prompt")
     print("2. PowerShell")
@@ -68,12 +74,18 @@ def get_user_environment():
     return "Windows", terminal
 
 def GetProjectName():
+    """
+    Asks the user to enter the name of the project and returns it.
+    """
     global ProjectName
     ProjectName = input("Enter the name of the project: ")
     print(f"The project name is {ProjectName}.")
     return ProjectName
 
 def CreateCommandText(project_name):
+    """
+    Creates a string of commands to create a new project with the given name, and returns it.
+    """
     operating_system, terminal, separator = get_os()
     commands = f"mkdir {project_name}{separator}\n" \
                 f"cd {project_name}{separator}\n" \
@@ -84,13 +96,19 @@ def CreateCommandText(project_name):
 
 # Create the text file
 def CreateTextFile(commands, project_name):
+    """
+    Creates a text file with the given commands and project name.
+    """
     # Open the text file in write mode
     # Write the commands to the file
     # Close the file
     # Print a message indicating that the file was created successfully.
-    with open(f'{project_name} - Copy into Terminal to create.txt', 'w') as file:
-        file.write(commands)
-    print ("Creating text file...")
+    try:
+        with open(f'{project_name} - Copy into Terminal to create.txt', 'w') as file:
+            file.write(commands)
+        print("Creating text file...")
+    except Exception as e:
+        print(f"Failed to create text file: {e}")
 
 # Check if the text file was created successfully
 # Then print a message indicating that the text file was created successfully.
@@ -101,15 +119,12 @@ def CheckTextFile(project_name):
         FailedInstruction()
 
 def SuccessfulInstruction():
-    print("Text file created successfully.")
-    print(" ")
+    print("Text file created successfully.\n")
 
 def FailedInstruction():
     print("Failed to create text file.")
-    print("Please try again.")
-    print(" ")
-    print("________________________________________________________________________")
-    print(" ")
+    print("Please try again.\n")
+    print("________________________________________________________________________\n")
 
 # This is the main program that calls the other functions
 def Main():
