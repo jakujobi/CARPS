@@ -48,7 +48,7 @@ def GetProjectName():
     print(f"The project name is {ProjectName}.")
     return ProjectName
 
-def create_command_text(project_name):
+def CreateCommandText(project_name):
     os = get_os()
     separator = " && " if os == "Windows" else " \\ "
     commands = f"""
