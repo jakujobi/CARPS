@@ -25,12 +25,11 @@ import os
 import platform
 
 
-def Greeting():
+def greeting():
     print("Welcome to the Project Creator!")
     print("This program will ask you for the name of a new .NET project,")
     print("and then generate a text file with the commands to create that project.")
-    print("_______________________________________________________________________")
-    print(" ")
+    print("_______________________________________________________________________\n")
 
 def get_os():
     """
@@ -60,16 +59,20 @@ def get_user_environment():
     print("1. Command Prompt")
     print("2. PowerShell")
     print("3. Other (e.g. Git Bash)")
-    terminal_choice = int(input("Enter the number of your choice: "))
-    if terminal_choice == 1:
-        terminal = "Command Prompt"
-    elif terminal_choice == 2:
-        terminal = "PowerShell"
-    elif terminal_choice == 3:
-        print("Other terminal selected.")
-        terminal = "PowerShell"
-    else:
-        print("Invalid choice. Defaulting to Command Prompt.")
+    try:
+        terminal_choice = int(input("Enter the number of your choice: "))
+        if terminal_choice == 1:
+            terminal = "Command Prompt"
+        elif terminal_choice == 2:
+            terminal = "PowerShell"
+        elif terminal_choice == 3:
+            print("Other terminal selected.")
+            terminal = "PowerShell"
+        else:
+            print("Invalid choice. Defaulting to Command Prompt.")
+            terminal = "Command Prompt"
+    except ValueError:
+        print("Invalid input. Defaulting to Command Prompt.")
         terminal = "Command Prompt"
     return "Windows", terminal
 
@@ -77,10 +80,10 @@ def get_project_name():
     """
     Asks the user to enter the name of the project and returns it.
     """
-    global ProjectName
-    ProjectName = input("Enter the name of the project: ")
-    print(f"The project name is {ProjectName}.")
-    return ProjectName
+    global project_name
+    project_name = input("Enter the name of the project: ")
+    print(f"The project name is {project_name}.")
+    return project_name
 
 def create_command_text(project_name):
     """
@@ -140,6 +143,7 @@ def main():
     """
     Main program that calls the other functions.
     """
+    greeting()
     project_name = get_project_name()  # Use a local variable instead of a global one
     commands = create_command_text(project_name)
     create_text_file(commands, project_name)
