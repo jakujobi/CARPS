@@ -99,16 +99,17 @@ def create_command_text(project_name):
     return commands
 
 def execute_commands(project_name):
+    base_path = os.getcwd()
+    project_path = os.path.join(base_path, project_name, project_name)
+
     commands = [
-        f"mkdir {project_name}",
-        f"cd {project_name}",
-        f"mkdir {project_name}",
-        f"cd {project_name}",
-        f"dotnet new sln -n {project_name}",
-        f"dotnet new console -o {project_name}",
-        f"dotnet sln add {project_name}/{project_name}.csproj",
-        f"dotnet build {project_name}/{project_name}.csproj",
-        f"dotnet run --project {project_name}/{project_name}.csproj"
+        f'mkdir "{project_name}"',
+        f'mkdir "{project_path}"',
+        f'dotnet new sln -n {project_name} -o "{project_path}"',
+        f'dotnet new console -o "{os.path.join(project_path, project_name)}"',
+        f'dotnet sln "{os.path.join(project_path, f"{project_name}.sln")}" add "{os.path.join(project_path, project_name, f"{project_name}.csproj")}"',
+        f'dotnet build "{os.path.join(project_path, project_name, f"{project_name}.csproj")}"',
+        f'dotnet run --project "{os.path.join(project_path, project_name, f"{project_name}.csproj")}"'
     ]
 
     for command in commands:
