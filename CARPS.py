@@ -26,17 +26,9 @@ def Greeting():
     print("Welcome to the Project Creator!")
     print("This program will ask you for the name of a new .NET project,")
     print("and then generate a text file with the commands to create that project.")
-    print("________________________________________________________________________")
+    print("_______________________________________________________________________")
     print(" ")
 
-"""
-GetProjectName function prompts the user to enter the name of the project and stores it in the global variable ProjectName. It then prints the project name and returns it.
-
-Parameters: None
-
-Returns:
-str: The name of the project entered by the user.
-"""
 def GetProjectName():
     global ProjectName
     ProjectName = input("Enter the name of the project: ")
