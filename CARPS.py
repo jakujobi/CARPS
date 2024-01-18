@@ -102,6 +102,8 @@ def execute_commands(project_name):
     commands = [
         f"mkdir {project_name}",
         f"cd {project_name}",
+        f"mkdir {project_name}",
+        f"cd {project_name}",
         f"dotnet new sln -n {project_name}",
         f"dotnet new console -o {project_name}",
         f"dotnet sln add {project_name}/{project_name}.csproj",
