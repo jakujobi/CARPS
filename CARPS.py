@@ -22,6 +22,19 @@ Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 
 
 import os
+import platform
+
+def get_os():
+    os = platform.system()
+    if os == "Windows":
+        return "Windows"
+    elif os == "Linux":
+        return "Linux"
+    elif os == "Darwin":
+        return "Mac"
+    else:
+        return "Unknown"
+
 def Greeting():
     print("Welcome to the Project Creator!")
     print("This program will ask you for the name of a new .NET project,")
@@ -35,13 +48,15 @@ def GetProjectName():
     print(f"The project name is {ProjectName}.")
     return ProjectName
 
-def CreateCommandText(ProjectName):
+def create_command_text(project_name):
+    os = get_os()
+    separator = " && " if os == "Windows" else " \\ "
     commands = f"""
-    mkdir {ProjectName} && \\
-    cd {ProjectName} && \\
-    dotnet new sln -n {ProjectName} && \\
-    dotnet new console -o {ProjectName} && \\
-    dotnet sln add {ProjectName}/{ProjectName}.csproj
+    mkdir {project_name}{separator}
+    cd {project_name}{separator}
+    dotnet new sln -n {project_name}{separator}
+    dotnet new console -o {project_name}{separator}
+    dotnet sln add {project_name}/{project_name}.csproj
     """
     return commands
 
@@ -63,7 +78,7 @@ def CheckTextFile(project_name):
     else:
         FailedInstruction()
 
-def SuccessfulInstruction:
+def SuccessfulInstruction():
     print("Text file created successfully.")
     print(" ")
 
