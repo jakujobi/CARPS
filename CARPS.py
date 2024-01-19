@@ -15,7 +15,7 @@ Features:
 
 Created by: John Akujobi
 Date: January 2024
-Version: 1.0
+Version: 3.0
 
 Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 """
