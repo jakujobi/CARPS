@@ -15,7 +15,7 @@ Features:
 
 Created by: John Akujobi
 Date: January 2024
-Version: 5.0
+Version: 6.0
 
 Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 """
@@ -25,6 +25,8 @@ import os
 import subprocess
 import re
 import argparse
+import tkinter as tk
+from tkinter import messagebox
 
 greeting_text = """
 C# Automated Rapid Project Setup (CARPS)
@@ -83,19 +85,6 @@ def execute_dotnet_commands(project_name):
     for single_command in dotnet_commands:
         execute_single_command(single_command)
 
-"""
-Main program that calls the other functions.
-
-This function sets up a new .NET project by parsing command line arguments,
-getting the project name if not provided, validating the project name,
-and executing the necessary commands.
-
-Parameters:
-None
-
-Returns:
-None
-"""
 def main():
     parser = argparse.ArgumentParser(description="Set up a new .NET project.")
     parser.add_argument("project_name", nargs='?', default=None, help="The name of the project to create.")
