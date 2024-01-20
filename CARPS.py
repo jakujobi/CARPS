@@ -167,7 +167,7 @@ def main():
         project_name_entry.insert(0, "Enter project name here")  # Add default text
         project_name_entry.pack(padx=10, pady=10)
 
-        run_button = tk.Button(root, text="Run Program", command=lambda: run_program(project_name_entry, loading_label, status_bar, run_button), font=("Arial", 14), bg="blue", fg="white")
+        run_button = tk.Button(root, text="Run Program", command=lambda: run_program(project_name_entry, loading_label, status_bar, run_button), font=("Arial", 14), bg="blue", fg="white", relief=tk.GROOVE, bd=5, highlightbackground="red", highlightcolor="green", activebackground="purple", activeforeground="yellow")
         run_button.pack(padx=10, pady=10)
 
         clear_button = tk.Button(root, text="Clear", command=lambda: project_name_entry.delete(0, 'end'), font=("Arial", 14))  # Add clear button
