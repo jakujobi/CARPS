@@ -83,7 +83,7 @@ def main():
     """
     Main program that calls the other functions.
     """
-    get_project_name()
+    project_name = get_project_name()
     execute_commands(project_name)
 
 if __name__ == "__main__":
