@@ -15,7 +15,7 @@ Features:
 
 Created by: John Akujobi
 Date: January 2024
-Version: 4.0
+Version: 5.0
 
 Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 """
@@ -23,6 +23,33 @@ Note: Ensure Python 3.x and .NET SDK are installed before running this script.
 
 import os
 import subprocess
+import re
+
+greeting_text = """
+C# Automated Rapid Project Setup (CARPS)
+Welcome to CARPS!
+This application helps you set up a new .NET project.
+It will:
+- Create a new directory for your project,
+- Initialize a new solution,
+- Create a new console application,
+- Add the application to the solution,
+- Build the application, and run it.
+Please ensure that .NET SDK are installed.
+Let's get started!\n
+"""
+
+def greeting():
+    print(greeting_text)
+
+def get_project_name():
+    project_name = input("Enter the name of the project: ")
+    validate_project_name(project_name)
+    return project_name
+
+def validate_project_name(project_name):
+    if not project_name or not re.match("^[A-Za-z0-9_]+$", project_name):
+        raise ValueError("Invalid project name. Project name must be non-empty and can only contain alphanumeric characters and underscores.")
 
 def execute_commands(project_name):
     base_path = os.getcwd()
@@ -39,12 +66,14 @@ def execute_commands(project_name):
     ]
 
     for command in commands:
+        print(f"Executing command: {command}")
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
 
         if process.returncode != 0:
             print(f"Failed to execute command: {command}")
             print(f"Error: {stderr.decode()}")
+            raise SystemExit("Stopping execution due to command failure.")
         else:
             print(f"Successfully executed command: {command}")
             print(f"Output: {stdout.decode()}")
@@ -54,8 +83,9 @@ def main():
     """
     Main program that calls the other functions.
     """
-    project_name = input("Enter the name of the project: ")
+    get_project_name()
     execute_commands(project_name)
 
-# Call the main function
-main()
+if __name__ == "__main__":
+    greeting()
+    main()
