@@ -85,17 +85,40 @@ def execute_dotnet_commands(project_name):
     for single_command in dotnet_commands:
         execute_single_command(single_command)
 
+def run_program(project_name_entry):
+    project_name = project_name_entry.get()
+    try:
+        validate_project_name(project_name)
+        execute_dotnet_commands(project_name)
+        messagebox.showinfo("Success", "Project created successfully")
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
 def main():
     parser = argparse.ArgumentParser(description="Set up a new .NET project.")
     parser.add_argument("project_name", nargs='?', default=None, help="The name of the project to create.")
     args = parser.parse_args()
 
-    if args.project_name is None:
-        args.project_name = get_project_name()
+    if args.project_name is not None:
+        # Command-line version
+        greeting()
+        validate_project_name(args.project_name)
+        execute_dotnet_commands(args.project_name)
+    else:
+        # GUI version
+        root = tk.Tk()
+        root.title("C# Automated Rapid Project Setup")
 
-    validate_project_name(args.project_name)
-    execute_dotnet_commands(args.project_name)  # Corrected function name
+        project_name_label = tk.Label(root, text="Project Name:")
+        project_name_label.pack()
+
+        project_name_entry = tk.Entry(root)
+        project_name_entry.pack()
+
+        run_button = tk.Button(root, text="Run Program", command=lambda: run_program(project_name_entry))
+        run_button.pack()
+
+        root.mainloop()
 
 if __name__ == "__main__":
-    greeting()
     main()
