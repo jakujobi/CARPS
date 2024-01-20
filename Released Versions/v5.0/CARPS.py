@@ -83,19 +83,6 @@ def execute_dotnet_commands(project_name):
     for single_command in dotnet_commands:
         execute_single_command(single_command)
 
-"""
-Main program that calls the other functions.
-
-This function sets up a new .NET project by parsing command line arguments,
-getting the project name if not provided, validating the project name,
-and executing the necessary commands.
-
-Parameters:
-None
-
-Returns:
-None
-"""
 def main():
     parser = argparse.ArgumentParser(description="Set up a new .NET project.")
     parser.add_argument("project_name", nargs='?', default=None, help="The name of the project to create.")
