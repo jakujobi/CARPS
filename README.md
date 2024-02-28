@@ -15,6 +15,17 @@ CARPS is a Python script that automates the setup of new C# projects. It streaml
 * Building and running the application.
 * Error handling for command execution.
 
+## Download the [latest release](https://github.com/jakujobi/CARPS/releases/)
+- [Download CARPS v4 for Microsoft.exe](https://github.com/jakujobi/CARPS/releases/download/v4.0/CARPS.exe)
+   - Place into the directory you want your project to be in.
+   - Run.
+   - It will ask you for the name of your project.
+   - Click enter
+   - It will create, build and test your project in the directory.
+Or
+- [Download the python script](https://github.com/jakujobi/CARPS/releases/download/v4.0/CARPS.py)
+  - Use python to run it in your favorite IDE (hopefully VsCode ;) )
+
 ## Functions
 
 ### greeting()
@@ -60,4 +71,4 @@ January 2024
 
 ## Version
 
-5.0
+4.0
