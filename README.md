@@ -1,4 +1,4 @@
-# SharpNest
+# StartDotNet
 C# Automated Rapid Project Setup (CARPS)
 
 ## Overview
