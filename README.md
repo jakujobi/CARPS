@@ -1,4 +1,4 @@
-#SharpNest
+# SharpNest
 C# Automated Rapid Project Setup (CARPS)
 
 ## Overview
